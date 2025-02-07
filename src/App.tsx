@@ -1,59 +1,28 @@
-import './App.css'
-import { useState } from 'react';
-import binaryTreeTest from './test/binaryTreeTest';
-import sidewinderTest from './test/sidewinderTest';
-import distanceGridTest from './test/distanceGridTest';
-import distanceGridTest2 from './test/distanceGridTest2';
-import colorGridTest from './test/colorGridTest';
-
+import './App.css';
+import { Tabs } from 'antd';
+import Test from './test/Test';
+import SvgMaze from './components/svgMaze';
 function App() {
-
-  const [mazeStr, setMazeStr] = useState('');
-
   return (
     <>
       <h1>Maze Gen</h1>
-      <div className="card">
-        <button onClick={() => { 
-          const tmp = colorGridTest()
-          setMazeStr(tmp)
-        }}>
-          Click me (Colored Grid)
-        </button>
-      </div>
-      <div className="card">
-        <button onClick={() => { 
-          const tmp = distanceGridTest2()
-          setMazeStr(tmp)
-        }}>
-          Click me (Dijkstra)
-        </button>
-      </div>
-      <div className="card">
-        <button onClick={() => { 
-          const tmp = distanceGridTest()
-          setMazeStr(tmp)
-        }}>
-          Click me (Dijkstra shortest path)
-        </button>
-      </div>
-      <div className="card">
-        <button onClick={() => { 
-          const tmp = binaryTreeTest()
-          setMazeStr(tmp)
-        }}>
-          Click me (binary Tree)
-        </button>
-      </div>
-      <div className="card">
-        <button onClick={() => { 
-          const tmp = sidewinderTest()
-          setMazeStr(tmp)
-        }}>
-          Click me (sidewinder)
-        </button>
-      </div>
-      <div dangerouslySetInnerHTML={{ __html: mazeStr }} />
+      <Tabs>
+        <Tabs.TabPane tab='BinaryTree' key='binaryTree'>
+          <div className='tabWrapper'>
+            <SvgMaze size={10} genMethod='binaryTree' num={8} />
+          </div>
+        </Tabs.TabPane>
+        <Tabs.TabPane tab='Sidewinder' key='sidewinder'>
+        <div className='tabWrapper'>
+           <SvgMaze size={10} genMethod='sidewinder' num={8} />
+           </div>
+        </Tabs.TabPane>
+        <Tabs.TabPane tab='乱七八糟' key='test'>
+        <div className='tabWrapper'>
+          <Test />
+          </div>
+        </Tabs.TabPane>
+      </Tabs>
     </>
   )
 }
