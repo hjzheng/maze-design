@@ -1,6 +1,7 @@
 import './App.css'
 import { useState } from 'react';
 import binaryTreeTest from './test/binaryTreeTest';
+import sidewinderTest from './test/sidewinderTest';
 
 function App() {
 
@@ -15,6 +16,14 @@ function App() {
           setMazeStr(tmp)
         }}>
           Click me (binary Tree)
+        </button>
+      </div>
+      <div className="card">
+        <button onClick={() => { 
+          const tmp = sidewinderTest()
+          setMazeStr(tmp)
+        }}>
+          Click me (sidewinder)
         </button>
       </div>
       <p className="read-the-docs">
