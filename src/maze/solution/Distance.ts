@@ -36,4 +36,16 @@ export default class Distances {
         }
         return distances;
     }
+
+    max() {
+        let max = -1;
+        let cell = this.root;
+        this.cells.forEach((distance, c) => {
+            if (distance > max) {
+                max = distance;
+                cell = c;
+            }
+        });
+        return { cell, distance: max };
+    }
 }

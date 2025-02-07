@@ -3,6 +3,8 @@ import { useState } from 'react';
 import binaryTreeTest from './test/binaryTreeTest';
 import sidewinderTest from './test/sidewinderTest';
 import distanceGridTest from './test/distanceGridTest';
+import distanceGridTest2 from './test/distanceGridTest2';
+import colorGridTest from './test/colorGridTest';
 
 function App() {
 
@@ -13,10 +15,26 @@ function App() {
       <h1>Maze Gen</h1>
       <div className="card">
         <button onClick={() => { 
+          const tmp = colorGridTest()
+          setMazeStr(tmp)
+        }}>
+          Click me (Colored Grid)
+        </button>
+      </div>
+      <div className="card">
+        <button onClick={() => { 
+          const tmp = distanceGridTest2()
+          setMazeStr(tmp)
+        }}>
+          Click me (Dijkstra)
+        </button>
+      </div>
+      <div className="card">
+        <button onClick={() => { 
           const tmp = distanceGridTest()
           setMazeStr(tmp)
         }}>
-          Click me (sidewinder with Dijkstra)
+          Click me (Dijkstra shortest path)
         </button>
       </div>
       <div className="card">

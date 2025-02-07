@@ -1,8 +1,7 @@
 import { ICell } from "../Cell";
 import Grid from "../Grid";
 
-
-export default function svg(grid: Grid, cellContent?: (cell: ICell) => string): string {
+export default function svg(grid: Grid, cellContent?: (cell: ICell) => string, cellBgColor?: (cell: ICell) => string): string {
     const cellSize = 30; // 单元格大小，可调整
     const strokeWidth = 1; // 线条粗细，可调整
 
@@ -19,6 +18,8 @@ export default function svg(grid: Grid, cellContent?: (cell: ICell) => string): 
 
         // 绘制文字 (如果有)
         if (cellContent) {
+            // 添加背景
+            if (cellBgColor) svg += `<rect x="${x1}" y="${y1}" width="${cellSize}" height="${cellSize}" fill="${cellBgColor(cell)}" />`;
             const textX = x1 + cellSize / 2;
             const textY = y1 + cellSize / 2;
             svg += `<text x="${textX}" y="${textY}" text-anchor="middle" dominant-baseline="middle">${cellContent(cell)}</text>`;
