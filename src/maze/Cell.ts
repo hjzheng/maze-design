@@ -1,3 +1,5 @@
+import Distances from "./solution/Distance";
+
 export interface ICell {
     row: number;
     col: number;
@@ -12,6 +14,7 @@ export interface ICell {
     linked(cell: ICell | undefined): boolean;
 
     getNeighbors(): ICell[];
+    distances(): Distances;
 }
 
 export default class Cell implements ICell {
@@ -51,5 +54,25 @@ export default class Cell implements ICell {
         if (this.east) neighbors.push(this.east);
         if (this.west) neighbors.push(this.west);
         return neighbors;
+    }
+
+    distances(): Distances {
+        const distances = new Distances(this);
+        let frontier = [this as ICell];
+        while (frontier.length > 0) {
+            const newFrontier: ICell[] = [];
+            const size = frontier.length;
+            for (let i = 0; i < size; i++) {
+                const cell = frontier.shift() as ICell;
+                for (const linkedCell of cell.links) {
+                    if (distances.get(linkedCell) === Infinity) {
+                        distances.set(linkedCell, distances.get(cell) + 1);
+                        newFrontier.push(linkedCell);
+                    }
+                }
+            }
+            frontier = newFrontier;
+        }
+        return distances;
     }
 }

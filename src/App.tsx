@@ -2,6 +2,7 @@ import './App.css'
 import { useState } from 'react';
 import binaryTreeTest from './test/binaryTreeTest';
 import sidewinderTest from './test/sidewinderTest';
+import distanceGridTest from './test/distanceGridTest';
 
 function App() {
 
@@ -10,6 +11,14 @@ function App() {
   return (
     <>
       <h1>Maze Gen</h1>
+      <div className="card">
+        <button onClick={() => { 
+          const tmp = distanceGridTest()
+          setMazeStr(tmp)
+        }}>
+          Click me (sidewinder with Dijkstra)
+        </button>
+      </div>
       <div className="card">
         <button onClick={() => { 
           const tmp = binaryTreeTest()
@@ -26,9 +35,7 @@ function App() {
           Click me (sidewinder)
         </button>
       </div>
-      <p className="read-the-docs">
-        <div dangerouslySetInnerHTML={{ __html: mazeStr }} />
-      </p>
+      <div dangerouslySetInnerHTML={{ __html: mazeStr }} />
     </>
   )
 }

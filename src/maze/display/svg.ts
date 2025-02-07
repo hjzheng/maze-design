@@ -2,7 +2,7 @@ import { ICell } from "../Cell";
 import Grid from "../Grid";
 
 
-export default function svg(grid: Grid): string {
+export default function svg(grid: Grid, cellContent?: (cell: ICell) => string): string {
     const cellSize = 30; // 单元格大小，可调整
     const strokeWidth = 1; // 线条粗细，可调整
 
@@ -16,6 +16,13 @@ export default function svg(grid: Grid): string {
         const y1 = cell.row * cellSize;
         const x2 = (cell.col + 1) * cellSize;
         const y2 = (cell.row + 1) * cellSize;
+
+        // 绘制文字 (如果有)
+        if (cellContent) {
+            const textX = x1 + cellSize / 2;
+            const textY = y1 + cellSize / 2;
+            svg += `<text x="${textX}" y="${textY}" text-anchor="middle" dominant-baseline="middle">${cellContent(cell)}</text>`;
+        }
 
         if (!cell?.north) {
             svg += `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y1}" stroke="black" stroke-width="${strokeWidth}" />`; // 如果北边没有邻居，绘制北边墙壁

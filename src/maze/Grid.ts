@@ -1,4 +1,6 @@
 import Cell, { ICell } from "./Cell";
+import ascii from "./display/ascii";
+import svg from "./display/svg";
 
 export default class Grid {
     public cells: ICell[][];
@@ -48,5 +50,17 @@ export default class Grid {
 
     eachCell(callback: (cell: ICell) => void): void {
         this.cells.forEach(row => row.forEach(callback));
+    }
+
+    getCell(row: number, col: number): ICell {
+        return this.cells[row][col];
+    }
+
+    toString(): string {
+        return ascii(this);
+    }
+
+    toSVG(): string {
+        return svg(this);
     }
 }
