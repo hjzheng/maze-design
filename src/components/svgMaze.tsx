@@ -3,16 +3,20 @@ import { useState, useEffect } from 'react';
 import ColorGrid from '../maze/ColorGrid';
 import BinaryTree from '../maze/gen/binaryTree';
 import Sidewinder from '../maze/gen/sidewinder';
+import AldousBroder from '../maze/gen/aldousBroder';
+import Wilson from '../maze/gen/wilson';
 
 type Porps = {
   size: number;
-  genMethod?: 'binaryTree' | 'sidewinder';
+  genMethod?: 'binaryTree' | 'sidewinder' | 'aldous-broder' | 'wilson';
   num?: number;
 }
 
 const genMap = {
   binaryTree: BinaryTree,
   sidewinder: Sidewinder,
+  'aldous-broder': AldousBroder,
+  'wilson': Wilson,
 }
 export default function SvgMaze({ size, num, genMethod = 'binaryTree' }: Porps) {
 

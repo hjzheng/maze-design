@@ -14,6 +14,7 @@ export interface ICell {
     linked(cell: ICell | undefined): boolean;
 
     getNeighbors(): ICell[];
+    randomNeighbor(): ICell | undefined;
     distances(): Distances;
 }
 
@@ -54,6 +55,12 @@ export default class Cell implements ICell {
         if (this.east) neighbors.push(this.east);
         if (this.west) neighbors.push(this.west);
         return neighbors;
+    }
+
+    randomNeighbor(): ICell | undefined {
+        const neighbors = this.getNeighbors();
+        if (neighbors.length === 0) return undefined;
+        return neighbors[Math.floor(Math.random() * neighbors.length)];
     }
 
     distances(): Distances {
