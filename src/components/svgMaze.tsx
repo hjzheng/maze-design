@@ -5,10 +5,11 @@ import BinaryTree from '../maze/gen/binaryTree';
 import Sidewinder from '../maze/gen/sidewinder';
 import AldousBroder from '../maze/gen/aldousBroder';
 import Wilson from '../maze/gen/wilson';
+import HuntAndKill from '../maze/gen/huntAndKill';
 
 type Porps = {
   size: number;
-  genMethod?: 'binaryTree' | 'sidewinder' | 'aldous-broder' | 'wilson';
+  genMethod?: 'binaryTree' | 'sidewinder' | 'aldous-broder' | 'wilson' | 'hunt-and-kill';
   num?: number;
 }
 
@@ -17,6 +18,7 @@ const genMap = {
   sidewinder: Sidewinder,
   'aldous-broder': AldousBroder,
   'wilson': Wilson,
+  'hunt-and-kill': HuntAndKill,
 }
 export default function SvgMaze({ size, num, genMethod = 'binaryTree' }: Porps) {
 

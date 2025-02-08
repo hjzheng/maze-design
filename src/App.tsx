@@ -27,6 +27,11 @@ function App() {
             <SvgMaze size={10} genMethod='wilson' num={8} />
           </div>
         </Tabs.TabPane>
+        <Tabs.TabPane tab='hunt-and-kill' key='hunt-and-kill'>
+          <div className='tabWrapper'>
+            <SvgMaze size={10} genMethod='hunt-and-kill' num={8} />
+          </div>
+        </Tabs.TabPane>
         <Tabs.TabPane tab='乱七八糟' key='test'>
           <div className='tabWrapper'>
             <Test />

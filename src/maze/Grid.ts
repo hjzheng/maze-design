@@ -57,6 +57,17 @@ export default class Grid {
         return this.cells[row][col];
     }
 
+    // 获取所有的死胡同
+    deadends(): ICell[] {
+        const deadends: ICell[] = [];
+        this.eachCell(cell => {
+            if (cell.links.length === 1) {
+                deadends.push(cell);
+            }
+        });
+        return deadends;
+    }
+
     toString(): string {
         return ascii(this);
     }
