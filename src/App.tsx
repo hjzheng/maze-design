@@ -2,6 +2,8 @@ import './App.css';
 import { Tabs } from 'antd';
 import Test from './test/Test';
 import SvgMaze from './components/svgMaze';
+import MaskedMaze from './components/MaskedMaze';
+
 function App() {
   return (
     <>
@@ -35,6 +37,11 @@ function App() {
         <Tabs.TabPane tab='recursive-backtracker' key='recursive-backtracker'>
           <div className='tabWrapper'>
             <SvgMaze size={10} genMethod='recursive-backtracker' num={8} />
+          </div>
+        </Tabs.TabPane>
+        <Tabs.TabPane tab='Image Masks Maze' key='image-mask-maze'>
+          <div className='tabWrapper'>
+            <MaskedMaze />
           </div>
         </Tabs.TabPane>
         <Tabs.TabPane tab='乱七八糟' key='test'>

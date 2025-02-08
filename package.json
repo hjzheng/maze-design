@@ -2,6 +2,7 @@
   "name": "maze-design",
   "private": true,
   "version": "0.0.0",
+  "description": "The Book of Mazes for Programmers（JavaScript Edition）",
   "type": "module",
   "scripts": {
     "dev": "vite",
