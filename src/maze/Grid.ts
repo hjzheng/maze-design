@@ -11,9 +11,13 @@ export default class Grid {
         this.cols = cols;
         this.rows = rows;
         this.cells = [];
-        for (let row = 0; row < rows; row++) {
+        this.init();
+    }
+
+    init() {
+        for (let row = 0; row < this.rows; row++) {
             this.cells[row] = [];
-            for (let col = 0; col < cols; col++) {
+            for (let col = 0; col < this.cols; col++) {
                 this.cells[row].push(new Cell(row, col));
             }
         }

@@ -3,6 +3,7 @@ import { Tabs } from 'antd';
 import Test from './test/Test';
 import SvgMaze from './components/svgMaze';
 import MaskedMaze from './components/MaskedMaze';
+import PollarMaze from './components/PollarMaze';
 import mazeUrl from './assets/maze_text.png';
 
 function App() {
@@ -43,6 +44,11 @@ function App() {
         <Tabs.TabPane tab='Image Masks Maze' key='image-mask-maze'>
           <div className='tabWrapper'>
             <MaskedMaze />
+          </div>
+        </Tabs.TabPane>
+        <Tabs.TabPane tab='Pollar Maze' key='pollar-maze'>
+          <div className='tabWrapper'>
+            <PollarMaze size={8} num={8}/>
           </div>
         </Tabs.TabPane>
         <Tabs.TabPane tab='test' key='test'>
