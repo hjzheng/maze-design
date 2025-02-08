@@ -1,18 +1,18 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import binaryTreeTest from './binaryTreeTest';
 import sidewinderTest from './sidewinderTest';
 import distanceGridTest from './distanceGridTest';
 import distanceGridTest2 from './distanceGridTest2';
-import colorGridTest from './colorGridTest';
+import colorGridTest from './colorGridCanvasTest';
 
 export default function Test() {
     const [mazeStr, setMazeStr] = useState('');
+    const canvas = useRef<HTMLCanvasElement>(null);  
 
     return <div>
       <div className="card">
         <button onClick={() => { 
-          const tmp = colorGridTest()
-          setMazeStr(tmp)
+          colorGridTest(canvas.current!);
         }}>
           Click me (Colored Grid)
         </button>
@@ -50,5 +50,6 @@ export default function Test() {
         </button>
       </div>
       <div dangerouslySetInnerHTML={{ __html: mazeStr }} />
+      <canvas ref={canvas} />
     </div>
 }

@@ -1,7 +1,7 @@
 import ColorGrid from '../maze/ColorGrid';
 import Sidewinder from '../maze/gen/sidewinder';
 
-export default function distanceGridTest2(): string {
+export default function distanceGridTest2(canvas: HTMLCanvasElement) {
     const grid = new ColorGrid(10, 10);
     const sidewinder = new Sidewinder();
     sidewinder.on(grid);
@@ -12,5 +12,6 @@ export default function distanceGridTest2(): string {
     grid.setDistances(distances);
     
     console.log(grid.toString());
-    return grid.toSVG();
+    
+    grid.canvasDraw(canvas);
 }
