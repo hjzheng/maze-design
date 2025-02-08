@@ -3,11 +3,12 @@ import { Tabs } from 'antd';
 import Test from './test/Test';
 import SvgMaze from './components/svgMaze';
 import MaskedMaze from './components/MaskedMaze';
+import mazeUrl from './assets/maze_text.png';
 
 function App() {
   return (
     <>
-      <h1>Maze Gen</h1>
+      <h1><img src={mazeUrl} /> Maze</h1>
       <Tabs>
         <Tabs.TabPane tab='binary-tree' key='binaryTree'>
           <div className='tabWrapper'>
@@ -44,7 +45,7 @@ function App() {
             <MaskedMaze />
           </div>
         </Tabs.TabPane>
-        <Tabs.TabPane tab='乱七八糟' key='test'>
+        <Tabs.TabPane tab='test' key='test'>
           <div className='tabWrapper'>
             <Test />
           </div>
