@@ -7,9 +7,9 @@ function App() {
     <>
       <h1>Maze Gen</h1>
       <Tabs>
-        <Tabs.TabPane tab='BinaryTree' key='binaryTree'>
+        <Tabs.TabPane tab='binary-tree' key='binaryTree'>
           <div className='tabWrapper'>
-            <SvgMaze size={10} genMethod='binaryTree' num={8} />
+            <SvgMaze size={10} genMethod='binary-tree' num={8} />
           </div>
         </Tabs.TabPane>
         <Tabs.TabPane tab='Sidewinder' key='sidewinder'>
@@ -30,6 +30,11 @@ function App() {
         <Tabs.TabPane tab='hunt-and-kill' key='hunt-and-kill'>
           <div className='tabWrapper'>
             <SvgMaze size={10} genMethod='hunt-and-kill' num={8} />
+          </div>
+        </Tabs.TabPane>
+        <Tabs.TabPane tab='recursive-backtracker' key='recursive-backtracker'>
+          <div className='tabWrapper'>
+            <SvgMaze size={10} genMethod='recursive-backtracker' num={8} />
           </div>
         </Tabs.TabPane>
         <Tabs.TabPane tab='乱七八糟' key='test'>

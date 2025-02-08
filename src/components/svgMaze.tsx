@@ -6,21 +6,23 @@ import Sidewinder from '../maze/gen/sidewinder';
 import AldousBroder from '../maze/gen/aldousBroder';
 import Wilson from '../maze/gen/wilson';
 import HuntAndKill from '../maze/gen/huntAndKill';
+import RecursiveBacktracker from '../maze/gen/recursiveBacktracker';
 
 type Porps = {
   size: number;
-  genMethod?: 'binaryTree' | 'sidewinder' | 'aldous-broder' | 'wilson' | 'hunt-and-kill';
+  genMethod?: 'binary-tree' | 'sidewinder' | 'aldous-broder' | 'wilson' | 'hunt-and-kill' | 'recursive-backtracker';
   num?: number;
 }
 
 const genMap = {
-  binaryTree: BinaryTree,
+  'binary-tree': BinaryTree,
   sidewinder: Sidewinder,
   'aldous-broder': AldousBroder,
   'wilson': Wilson,
   'hunt-and-kill': HuntAndKill,
+  'recursive-backtracker': RecursiveBacktracker,
 }
-export default function SvgMaze({ size, num, genMethod = 'binaryTree' }: Porps) {
+export default function SvgMaze({ size, num, genMethod = 'binary-tree' }: Porps) {
 
     const [mazeStrs, setMazeStrs] = useState<string[]>([]);
     
