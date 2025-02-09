@@ -1,17 +1,17 @@
 import Grid from "./Grid";
-import { ICell } from "./Cell";
+import Cell, { ICell } from "./Cell";
 import Distances from "./solution/Distance";
 import ascii from "./display/ascii";
 import svg from "./display/svg";
 import canvas from "./display/canvas";
 
-export default class DistanceGrid extends Grid {
+export default class DistanceGrid extends Grid<Cell> {
     distances: Distances | undefined;
     constructor(rows: number, cols: number) {
         super(rows, cols);
     }
 
-    setDistances(distances: Distances) {
+    setDistances(distances?: Distances) {
         this.distances = distances;
     }
 

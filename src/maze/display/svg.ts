@@ -1,7 +1,7 @@
 import { ICell } from "../Cell";
 import Grid from "../Grid";
 
-export default function svg(grid: Grid, cellContent?: (cell: ICell) => string, cellBgColor?: (cell: ICell) => string): string {
+export default function svg(grid: Grid<ICell>, cellContent?: (cell: ICell) => string, cellBgColor?: (cell: ICell) => string): string {
     const cellSize = 30; // 单元格大小，可调整
     const strokeWidth = 1; // 线条粗细，可调整
 

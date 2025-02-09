@@ -2,7 +2,7 @@ import Grid from '../Grid';
 import { ICell } from '../Cell';
 
 export default class Sidewinder {
-    on(grid: Grid): Grid {
+    on(grid: Grid<ICell>): Grid<ICell> {
         grid.eachRow((row: ICell[]) => {
             let run: ICell[] = [];
             row.forEach((cell: ICell) => {

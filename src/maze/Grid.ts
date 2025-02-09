@@ -3,8 +3,8 @@ import ascii from "./display/ascii";
 import svg from "./display/svg";
 import canvas from "./display/canvas";
 
-export default class Grid {
-    public cells: ICell[][];
+export default class Grid<T extends ICell> {
+    public cells: T[][];
     public cols: number;
     public rows: number;
     constructor(rows: number, cols: number) {
@@ -18,7 +18,7 @@ export default class Grid {
         for (let row = 0; row < this.rows; row++) {
             this.cells[row] = [];
             for (let col = 0; col < this.cols; col++) {
-                this.cells[row].push(new Cell(row, col));
+                this.cells[row].push(new (Cell as any as { new(row: number, col: number): T })(row, col));
             }
         }
         this.configureCells();
@@ -39,31 +39,34 @@ export default class Grid {
         return this.rows * this.cols;
     }
 
-    isInBounds(cell: ICell): boolean {
+    isInBounds(cell: T): boolean {
         return cell.row >= 0 && cell.row < this.rows && cell.col >= 0 && cell.col < this.cols;
     }
 
-    randomCell(): ICell {
+    randomCell(): T {
         const row = Math.floor(Math.random() * this.rows);
         const col = Math.floor(Math.random() * this.cols);
         return this.cells[row][col];
     }
 
-    eachRow(callback: (row: ICell[]) => void): void {
+    eachRow(callback: (row: T[]) => void): void {
         this.cells.forEach(callback);
     }
 
-    eachCell(callback: (cell: ICell) => void): void {
+    eachCell(callback: (cell: T) => void): void {
         this.cells.forEach(row => row.forEach(callback));
     }
 
-    getCell(row: number, col: number): ICell {
+    getCell(row: number, col: number): T | undefined {
+        if (row < 0 || row >= this.rows || col < 0 || col >= this.cols) {
+            return undefined;
+        }
         return this.cells[row][col];
     }
 
     // 获取所有的死胡同
-    deadends(): ICell[] {
-        const deadends: ICell[] = [];
+    deadends(): T[] {
+        const deadends: T[] = [];
         this.eachCell(cell => {
             if (cell.links.length === 1) {
                 deadends.push(cell);

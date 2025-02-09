@@ -2,7 +2,7 @@ import Grid from '../Grid';
 import { ICell } from '../Cell';
 
 export default class BinaryTree {
-    on(grid: Grid): Grid {
+    on(grid: Grid<ICell>): Grid<ICell> {
         grid.eachCell((cell: ICell) => {
             const neighbors: ICell[] = [];
 

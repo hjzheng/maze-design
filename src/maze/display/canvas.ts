@@ -1,7 +1,7 @@
 import { ICell } from "../Cell";
 import Grid from "../Grid";
 
-export default function canvas(canvas: HTMLCanvasElement, grid: Grid, cellContent?: (cell: ICell) => string, cellBgColor?: (cell: ICell) => string) {
+export default function canvas(canvas: HTMLCanvasElement, grid: Grid<ICell>, cellContent?: (cell: ICell) => string, cellBgColor?: (cell: ICell) => string) {
     const cellSize = 30; // 单元格大小，可调整
     const strokeWidth = 1; // 线条粗细，可调整
 

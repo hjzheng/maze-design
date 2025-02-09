@@ -1,5 +1,5 @@
 import Grid from "./Grid";
-import { ICell } from "./Cell";
+import Cell, { ICell } from "./Cell";
 import Distances from "./solution/Distance";
 import svg from "./display/svg";
 import canvas from "./display/canvas";
@@ -15,14 +15,14 @@ const genCellBgColor = (currentCellNumber: number, maxDistance: number) => {
     return `rgb(${dark}, ${bright}, ${dark})`;
 }
 
-export default class ColorGrid extends Grid {
+export default class ColorGrid extends Grid<Cell> {
 
     distances: Distances | undefined;
     constructor(rows: number, cols: number) {
         super(rows, cols);
     }
 
-    setDistances(distances: Distances) {
+    setDistances(distances?: Distances) {
         this.distances = distances;
     }
 

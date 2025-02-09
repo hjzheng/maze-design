@@ -1,7 +1,8 @@
+import { ICell } from '../Cell';
 import Grid from '../Grid';
 
 export default class AldousBroder {
-    on(grid: Grid) {
+    on(grid: Grid<ICell>) {
         let cell = grid.randomCell();
         let unvisited = grid.size() - 1;
         while (unvisited > 0) {

@@ -18,7 +18,7 @@ function randomCell(set: Set<ICell>): ICell {
 
 
 export default class Wilson {
-    on(grid: Grid) {
+    on(grid: Grid<ICell>) {
         let unvisited: Set<ICell> = new Set();
         grid.eachCell((cell: ICell) => {
             unvisited.add(cell);

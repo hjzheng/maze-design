@@ -2,7 +2,7 @@ import Grid from "../Grid";
 import { ICell } from "../Cell";
 
 export default class RecursiveBacktracker {
-    on(grid: Grid) {
+    on(grid: Grid<ICell>) {
         let stack = [];
         let startCell: ICell = grid.randomCell();
         stack.push(startCell);

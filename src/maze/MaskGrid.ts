@@ -2,7 +2,7 @@ import Grid from "./Grid";
 import Mask from "./tools/Mask";
 import Cell from "./Cell";
 
-export default class MaskGrid extends Grid {
+export default class MaskGrid extends Grid<Cell> {
     mask: Mask;
     constructor(mask: Mask) {
         const { rows, cols } = mask;

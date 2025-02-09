@@ -2,7 +2,7 @@ import Grid from "./Grid";
 import PolarCell from "./PolarCell";
 
 
-export default class PolarGrid extends Grid {
+export default class PolarGrid extends Grid<PolarCell> {
     constructor(rows: number) {
         super(rows, 0);
     }
