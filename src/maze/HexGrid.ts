@@ -44,7 +44,7 @@ export default class HexGrid extends Grid<HexCell> {
         const size = 30; // 边大小
         const aSize = size / 2;
         const bSize = size * Math.sqrt(3) / 2;
-        const hexWidth = size * 2; 
+        // const hexWidth = size * 2; 
         const hexHeight = bSize * 2;
         const strokeWidth = 1; // 线条粗细，可调整
 

@@ -5,6 +5,7 @@ import SvgMaze from './components/svgMaze';
 import MaskedMaze from './components/MaskedMaze';
 import PollarMaze from './components/PollarMaze';
 import HexMaze from './components/HexMaze';
+import TrangleMaze from './components/TrangleMaze';
 import mazeUrl from './assets/maze_text.png';
 
 function App() {
@@ -55,6 +56,11 @@ function App() {
         <Tabs.TabPane tab='Hex Maze' key='hex-maze'>
           <div className='tabWrapper'>
             <HexMaze size={8} num={8}/>
+          </div>
+        </Tabs.TabPane>
+        <Tabs.TabPane tab='Trangle Maze' key='trangle-maze'>
+          <div className='tabWrapper'>
+            <TrangleMaze size={10} num={8} />
           </div>
         </Tabs.TabPane>
         <Tabs.TabPane tab='test' key='test'>
