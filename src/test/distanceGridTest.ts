@@ -16,5 +16,5 @@ export default function distanceGridTest(): string {
     grid.setDistances(distances);
     
     console.log(grid.toString());
-    return grid.toSVG();
+    return grid.toSVG(undefined, 2);
 }

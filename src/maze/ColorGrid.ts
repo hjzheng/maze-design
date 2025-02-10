@@ -21,13 +21,13 @@ export default class ColorGrid<T extends ICell> extends DistanceGrid<T> {
     }
 
     // override
-    toSVG(cellBgColor?: (cell: T) => string): string {
+    toSVG(cellBgColor?: (cell: T) => string, inset?: number): string {
         const { distance: maxDistance } = this.distances?.max() || { distance: 0 };
         return svg(this, (cell: T) => {
             return getCellContent(this?.distances?.get(cell) ?? 0);
         }, cellBgColor ? cellBgColor : (cell: T) => {
             return genCellBgColor(this?.distances?.get(cell) ?? 0, maxDistance);
-        });
+        }, inset || 0);
     }
 
     canvasDraw(canvasEle: HTMLCanvasElement) {

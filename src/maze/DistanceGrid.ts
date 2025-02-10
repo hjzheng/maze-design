@@ -16,11 +16,11 @@ export default class DistanceGrid<T extends ICell> extends Grid<T> {
     }
 
     // override
-    toSVG(): string {
+    toSVG(cellBgColor?: (cell: T) => string, inset?: number): string {
         return svg(this, (cell: T) => {
             const number = this?.distances?.get(cell);
             return number!== undefined && number!== Infinity?  number?.toString() : '';
-        });
+        }, cellBgColor ? cellBgColor : undefined, inset || 0);
     }
 
     // override
