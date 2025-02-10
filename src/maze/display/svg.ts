@@ -1,14 +1,14 @@
 import { ICell } from "../Cell";
 import Grid from "../Grid";
 
-export default function svg(grid: Grid<ICell>, cellContent?: (cell: ICell) => string, cellBgColor?: (cell: ICell) => string): string {
+export default function svg<T extends ICell>(grid: Grid<T>, cellContent?: (cell: T) => string, cellBgColor?: (cell: T) => string): string {
     const cellSize = 30; // 单元格大小，可调整
     const strokeWidth = 1; // 线条粗细，可调整
 
     let svg = `<svg width="${grid.cols * cellSize + 1}" height="${grid.rows * cellSize + 1}">`;
 
     // 绘制墙壁 (根据链接情况)
-    grid.eachCell((cell: ICell) => {
+    grid.eachCell((cell: T) => {
         if (!cell) return; // 跳过空单元格
 
         const x1 = cell.col * cellSize;
@@ -16,10 +16,10 @@ export default function svg(grid: Grid<ICell>, cellContent?: (cell: ICell) => st
         const x2 = (cell.col + 1) * cellSize;
         const y2 = (cell.row + 1) * cellSize;
 
+         // 添加背景颜色
+        if (cellBgColor) svg += `<rect x="${x1}" y="${y1}" width="${cellSize}" height="${cellSize}" fill="${cellBgColor(cell)}" />`;
         // 绘制文字 (如果有)
         if (cellContent) {
-            // 添加背景
-            if (cellBgColor) svg += `<rect x="${x1}" y="${y1}" width="${cellSize}" height="${cellSize}" fill="${cellBgColor(cell)}" />`;
             const textX = x1 + cellSize / 2;
             const textY = y1 + cellSize / 2;
             svg += `<text x="${textX}" y="${textY}" text-anchor="middle" dominant-baseline="middle">${cellContent(cell)}</text>`;

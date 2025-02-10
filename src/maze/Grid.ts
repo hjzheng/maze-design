@@ -75,6 +75,22 @@ export default class Grid<T extends ICell> {
         return deadends;
     }
 
+    // 编排
+    braid(p = 1.0) {
+        const cells = this.deadends();
+        for (let i=0; i<cells.length; i++) {
+            if (cells[i].links.length !== 1 && Math.random() < p) {
+                continue;
+            } else {
+                const neighbors = cells[i].getNeighbors().filter(neighbor => !cells[i].linked(neighbor));
+                let best = neighbors.filter(neighbor => neighbor.links.length === 1);
+                best = best.length > 0 ? best : neighbors;
+                const neighbor = best[Math.floor(Math.random() * best.length)];
+                cells[i].link(neighbor);
+            }
+        }
+    }
+
     toString(): string {
         return ascii(this);
     }

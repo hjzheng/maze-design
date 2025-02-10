@@ -1,6 +1,5 @@
-import Grid from "./Grid";
-import Cell, { ICell } from "./Cell";
-import Distances from "./solution/Distance";
+import DistanceGrid from "./DistanceGrid";
+import { ICell } from "./Cell";
 import svg from "./display/svg";
 import canvas from "./display/canvas";
 
@@ -15,32 +14,27 @@ const genCellBgColor = (currentCellNumber: number, maxDistance: number) => {
     return `rgb(${dark}, ${bright}, ${dark})`;
 }
 
-export default class ColorGrid extends Grid<Cell> {
+export default class ColorGrid<T extends ICell> extends DistanceGrid<T> {
 
-    distances: Distances | undefined;
     constructor(rows: number, cols: number) {
         super(rows, cols);
     }
 
-    setDistances(distances?: Distances) {
-        this.distances = distances;
-    }
-
     // override
-    toSVG(): string {
+    toSVG(cellBgColor?: (cell: T) => string): string {
         const { distance: maxDistance } = this.distances?.max() || { distance: 0 };
-        return svg(this, (cell: ICell) => {
+        return svg(this, (cell: T) => {
             return getCellContent(this?.distances?.get(cell) ?? 0);
-        }, (cell: ICell) => {
+        }, cellBgColor ? cellBgColor : (cell: T) => {
             return genCellBgColor(this?.distances?.get(cell) ?? 0, maxDistance);
         });
     }
 
     canvasDraw(canvasEle: HTMLCanvasElement) {
         const { distance: maxDistance } = this.distances?.max() || { distance: 0 };
-        canvas(canvasEle, this, (cell: ICell) => {
+        canvas(canvasEle, this, (cell: T) => {
             return getCellContent(this?.distances?.get(cell)?? 0);
-        }, (cell: ICell) => {
+        }, (cell: T) => {
             return genCellBgColor(this?.distances?.get(cell) ?? 0, maxDistance);
         });
     }

@@ -20,7 +20,8 @@ export default class Distances {
     }
 
     // Dijkstra's algorithm
-    toGoal(goal: ICell): Distances {
+    toGoal(goal?: ICell): Distances {
+        if (!goal) return this;
         const distances = new Distances(this.root);
         let current = goal;
         distances.set(current, this.get(current));

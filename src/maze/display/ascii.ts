@@ -1,7 +1,7 @@
 import Cell, { ICell } from "../Cell";
 import Grid from "../Grid";
 
-export default function ascii(grid: Grid, cellContent?: (cell: ICell) => string): string {
+export default function ascii<T extends ICell>(grid: Grid<T>, cellContent?: (cell: T) => string): string {
     let s = '';
     s += '+'; // top left corner
     for (let i = 0; i < grid.cols; i++) {
@@ -11,8 +11,8 @@ export default function ascii(grid: Grid, cellContent?: (cell: ICell) => string)
     grid.eachRow(row => {
         let top = '|';
         let bottom = '+';
-        row.forEach((cell: ICell) => {
-            if (!cell) cell = new Cell(-1, -1); 
+        row.forEach((cell: T) => {
+            if (!cell) cell = new Cell(-1, -1) as unknown as T; 
 
             const body = cellContent ? (cellContent(cell) || '   ') : '   ';
             let east_boundary = cell.linked(cell?.east) ? ' ' : '|';
