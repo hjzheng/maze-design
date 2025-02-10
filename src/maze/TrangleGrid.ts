@@ -1,7 +1,7 @@
 import TrangleCell from "./TrangleCell";
-import Grid from "./Grid";
+import ColorGrid from "./ColorGrid";
 
-export default class TrangleGrid extends Grid<TrangleCell> {
+export default class TrangleGrid extends ColorGrid<TrangleCell> {
     constructor(rows: number, cols: number) {
         super(rows, cols);
     }
@@ -30,7 +30,11 @@ export default class TrangleGrid extends Grid<TrangleCell> {
         });
     }
 
-    toSVG(cellContent?: (cell: TrangleCell) => string, cellBgColor?: (cell: TrangleCell) => string): string {
+    toSVG(cellBgColor?: ((cell: TrangleCell) => string) | undefined): string {
+        return this._toSVG(super.getCellContent.bind(this), cellBgColor || super.getCellBgColor.bind(this));
+    }
+
+    _toSVG(cellContent?: (cell: TrangleCell) => string, cellBgColor?: (cell: TrangleCell) => string): string {
         let size = 60; // 三角形边
         let half_size = size / 2;
         let height = size * Math.sin(60 * Math.PI / 180);

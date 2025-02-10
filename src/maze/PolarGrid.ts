@@ -1,8 +1,8 @@
-import Grid from "./Grid";
+import ColorGrid from "./ColorGrid";
 import PolarCell from "./PolarCell";
 
 
-export default class PolarGrid extends Grid<PolarCell> {
+export default class PolarGrid extends ColorGrid<PolarCell> {
     constructor(rows: number) {
         super(rows, 0);
     }
@@ -56,8 +56,12 @@ export default class PolarGrid extends Grid<PolarCell> {
         return this.cells[row][col % this.cells[row].length] as PolarCell;
     }
 
+    toSVG(cellBgColor?: ((cell: PolarCell) => string) | undefined): string {
+        return this._toSVG(super.getCellContent.bind(this), cellBgColor || super.getCellBgColor.bind(this));
+    }
+
     // override
-    toSVG(cellContent?: (cell: PolarCell) => string, cellBgColor?: (cell: PolarCell) => string): string {
+    _toSVG(cellContent?: (cell: PolarCell) => string, cellBgColor?: (cell: PolarCell) => string): string {
         const cellSize = 30; // 单元格大小，可调整
         const strokeWidth = 1; // 线条粗细，可调整
         const imageSize = 2 * cellSize * this.rows;

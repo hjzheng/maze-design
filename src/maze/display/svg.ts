@@ -22,7 +22,7 @@ export default function svg<T extends ICell>(grid: Grid<T>, cellContent?: (cell:
     return svgStr;
 }
 
-function cellPointsWithInset(x: number, y: number, cellSize: number, inset: number) {
+export function cellPointsWithInset(x: number, y: number, cellSize: number, inset: number) {
   
   const x1 = x;
   const x2 = x1 + inset;
@@ -37,7 +37,7 @@ function cellPointsWithInset(x: number, y: number, cellSize: number, inset: numb
   return { x1, x2, x3, x4, y1, y2, y3, y4 };
 }
 
-function toSvgWithInset<T extends ICell>(cell: T, cellSize: number, strokeWidth: number, inset: number, cellContent?: (cell: T) => string, cellBgColor?: (cell: T) => string) {
+export function toSvgWithInset<T extends ICell>(cell: T, cellSize: number, strokeWidth: number, inset: number, cellContent?: (cell: T) => string, cellBgColor?: (cell: T) => string) {
 
     let svgStr = '';
     const x = cell.col * cellSize;
@@ -86,7 +86,7 @@ function toSvgWithInset<T extends ICell>(cell: T, cellSize: number, strokeWidth:
     return svgStr;
 }
 
-function toSvgWithoutInset<T extends ICell>(cell: T, cellSize: number, strokeWidth: number, cellContent?: (cell: T) => string, cellBgColor?: (cell: T) => string) {
+export function toSvgWithoutInset<T extends ICell>(cell: T, cellSize: number, strokeWidth: number, cellContent?: (cell: T) => string, cellBgColor?: (cell: T) => string) {
     let svgStr = '';
     const x1 = cell.col * cellSize;
     const y1 = cell.row * cellSize;

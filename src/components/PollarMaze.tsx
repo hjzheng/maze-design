@@ -1,6 +1,6 @@
 import { Flex } from 'antd';
 import { useState, useEffect } from 'react';
-import PolarDistanceGrid from '../maze/PolarDistanceGrid';
+import PolarGrid from '../maze/PolarGrid';
 import RecursiveBacktracker from '../maze/gen/recursiveBacktracker';
 
 type Porps = {
@@ -18,7 +18,7 @@ export default function PollarMaze({ size, num, genMethod = 'recursive-backtrack
     
     const clickHandler = () => {
         const temps = Array(num).fill(0).map(() => {
-            const grid = new PolarDistanceGrid(size);
+            const grid = new PolarGrid(size);
             const gen = new genMap[genMethod]();
             gen.on(grid);
             let distances = grid.getCell(0, 0)?.distances();

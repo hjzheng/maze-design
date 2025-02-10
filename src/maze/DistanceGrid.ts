@@ -15,12 +15,14 @@ export default class DistanceGrid<T extends ICell> extends Grid<T> {
         this.distances = distances;
     }
 
+    getCellContent(cell: T): string {
+        const number = this?.distances?.get(cell);
+        return number !== undefined && number !== Infinity ? number?.toString() : '';
+    }
+
     // override
     toSVG(cellBgColor?: (cell: T) => string, inset?: number): string {
-        return svg(this, (cell: T) => {
-            const number = this?.distances?.get(cell);
-            return number!== undefined && number!== Infinity?  number?.toString() : '';
-        }, cellBgColor ? cellBgColor : undefined, inset || 0);
+        return svg(this, this.getCellContent.bind(this), cellBgColor ? cellBgColor : undefined, inset || 0);
     }
 
     // override
@@ -31,10 +33,7 @@ export default class DistanceGrid<T extends ICell> extends Grid<T> {
         });
     }
 
-    canvasDraw(canvasEle: HTMLCanvasElement) {
-        canvas(canvasEle, this, (cell: T) => {
-            const number = this?.distances?.get(cell);
-            return number!== undefined && number!== Infinity?  number?.toString() : '';
-        });
+    canvasDraw(canvasEle: HTMLCanvasElement, cellBgColor?: (cell: T) => string,) {
+        canvas(canvasEle, this, this.getCellContent.bind(this), cellBgColor ? cellBgColor : undefined);
     }
 }

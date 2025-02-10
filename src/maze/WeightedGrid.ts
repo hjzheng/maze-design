@@ -16,7 +16,7 @@ export default class WeightedGrid extends ColorGrid<WeightedCell>{
         this.configureCells();
     }
 
-    cellBgColor(cell: WeightedCell): string {
+    genCellBgColor(cell: WeightedCell): string {
         let color = `rgb(255, 255, 255)`;
         const weight = cell.weight;
         if (weight > 1) {
@@ -35,6 +35,6 @@ export default class WeightedGrid extends ColorGrid<WeightedCell>{
     }
 
     toSVG(): string {
-        return super.toSVG(this.cellBgColor.bind(this));
+        return super.toSVG(this.genCellBgColor.bind(this));
     }
 }

@@ -1,6 +1,6 @@
 import { Flex } from 'antd';
 import { useState, useEffect } from 'react';
-import HexDistanceGrid from '../maze/HexDistanceGrid';
+import HexGrid from '../maze/HexGrid';
 import RecursiveBacktracker from '../maze/gen/recursiveBacktracker';
 
 type Porps = {
@@ -18,7 +18,7 @@ export default function HexMaze({ size, num, genMethod = 'recursive-backtracker'
     
     const clickHandler = () => {
         const temps = Array(num).fill(0).map(() => {
-            const grid = new HexDistanceGrid(size, size);
+            const grid = new HexGrid(size, size);
             const gen = new genMap[genMethod]();
             gen.on(grid);
             let distances = grid.getCell(0, 0)?.distances();

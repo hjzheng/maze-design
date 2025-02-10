@@ -16,6 +16,10 @@ export interface ICell {
     getNeighbors(): ICell[];
     randomNeighbor(): ICell | undefined;
     distances(): Distances;
+
+    horizontalPassage?(): boolean;
+    verticalPassage?(): boolean;
+
 }
 
 export default class Cell implements ICell {

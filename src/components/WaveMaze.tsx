@@ -1,6 +1,6 @@
 import { Flex } from 'antd';
 import { useState, useEffect } from 'react';
-import TrangleGrid from '../maze/TrangleGrid';
+import WaveGird from '../maze/WaveGrid';
 import RecursiveBacktracker from '../maze/gen/recursiveBacktracker';
 
 type Porps = {
@@ -12,16 +12,17 @@ type Porps = {
 const genMap = {
   'recursive-backtracker': RecursiveBacktracker,
 }
-export default function HexMaze({ size, num, genMethod = 'recursive-backtracker' }: Porps) {
+export default function WaveMaze({ size, num, genMethod = 'recursive-backtracker' }: Porps) {
 
     const [mazeStrs, setMazeStrs] = useState<string[]>([]);
     
     const clickHandler = () => {
         const temps = Array(num).fill(0).map(() => {
-            const grid = new TrangleGrid(size, size + 6);
+            const grid = new WaveGird(size, size);
             const gen = new genMap[genMethod]();
             gen.on(grid);
-            let distances = grid.getCell(0, 0)?.distances();
+            // grid.braid(0.5);
+            let distances = grid.getCell(0, 0)?.distances().toGoal(grid.getCell(size - 1, size - 1));
             grid.setDistances(distances);
             return grid.toSVG();
         })

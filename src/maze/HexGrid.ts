@@ -1,7 +1,7 @@
 import HexCell from "./HexCell";
-import Grid from "./Grid";
+import ColorGrid from "./ColorGrid";
 
-export default class HexGrid extends Grid<HexCell> {
+export default class HexGrid extends ColorGrid<HexCell> {
     constructor(rows: number, cols: number) {
         super(rows, cols);
     }
@@ -39,8 +39,12 @@ export default class HexGrid extends Grid<HexCell> {
         });
     }
 
+    toSVG(cellBgColor?: ((cell: HexCell) => string) | undefined): string {
+        return this._toSVG(super.getCellContent.bind(this), cellBgColor || super.getCellBgColor.bind(this));
+    }
+
     // override
-    toSVG(cellContent?: (cell: HexCell) => string, cellBgColor?: (cell: HexCell) => string): string {
+    _toSVG(cellContent?: (cell: HexCell) => string, cellBgColor?: (cell: HexCell) => string): string {
         const size = 30; // 边大小
         const aSize = size / 2;
         const bSize = size * Math.sqrt(3) / 2;
