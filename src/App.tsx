@@ -8,6 +8,7 @@ import HexMaze from './components/HexMaze';
 import TrangleMaze from './components/TrangleMaze';
 import WeightedMaze from './components/WeightedMaze';
 import WaveMaze from './components/WaveMaze';
+import KruskalWaveMaze from './components/KruskalWaveMaze';
 import mazeUrl from './assets/maze_text.png';
 
 function App() {
@@ -73,6 +74,11 @@ function App() {
         <Tabs.TabPane tab='Wave Maze' key='wave-maze'>
           <div className='tabWrapper'>
             <WaveMaze size={10} num={8} />
+          </div>
+        </Tabs.TabPane>
+        <Tabs.TabPane tab='Kruskal Wave Maze' key='kruskal-wave-maze'>
+          <div className='tabWrapper'>
+            <KruskalWaveMaze size={20} num={4} />
           </div>
         </Tabs.TabPane>
         <Tabs.TabPane tab='test' key='test'>

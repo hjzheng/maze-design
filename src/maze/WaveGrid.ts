@@ -33,7 +33,7 @@ export default class WaveGrid extends ColorGrid<OverCell | UnderCell> {
             })
         });
 
-        this.underCells.forEach(cell => {
+        this.underCells?.forEach(cell => {
             callback(cell);
         })
     }

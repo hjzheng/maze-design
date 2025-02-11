@@ -119,3 +119,26 @@ export class UnderCell extends Cell {
         return !!this.north || !!this.south;
     }
 }
+
+export class SimpleOverCell extends OverCell {
+    constructor(row: number, col: number, grid: WaveGrid) {
+        super(row, col, grid);
+    }
+
+    getNeighbors(): SimpleOverCell[] {
+        let neighbors = super.getNeighbors();
+        if (this.north) {
+            neighbors.push(this.north as SimpleOverCell);
+        }
+        if (this.south) {
+            neighbors.push(this.south as SimpleOverCell);
+        }
+        if (this.east) {
+            neighbors.push(this.east as SimpleOverCell);
+        }
+        if (this.west) {
+            neighbors.push(this.west as SimpleOverCell);
+        }
+        return neighbors;
+    }
+}
