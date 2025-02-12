@@ -3,15 +3,12 @@ import Cell3D from "./Cell3D"
 import points from "./display/points"
 
 export default class Grid3D extends Grid<Cell3D> {
-    levels: number = 1
-
-    constructor(levels: number, rows: number, columns: number) {
-        super(rows, columns)
-        this.levels = levels
+    constructor(rows: number, cols: number, levels: number) {
+        super(rows, cols, levels)
+        this.init();
     }
 
     init(): void {
-        this.levels = 3
         for (let i=0; i<this.levels; i++) {
             this.cells[i] = []
             for (let j=0; j<this.rows; j++) {
@@ -37,7 +34,6 @@ export default class Grid3D extends Grid<Cell3D> {
         })
     }
 
-    // @ts-ignore overload
     getCell(level: number, row: number, col: number): Cell3D | undefined {
         if (level >=0 && level < this.levels && row >= 0 && row < this.rows && col >= 0 && col < this.cols) {
             return this.cells[level][row][col];

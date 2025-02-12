@@ -18,31 +18,36 @@ export default function points(grid: Grid3D) {
 
     const width = grid.cols * cellSize + 1;
     const height = grid.rows * cellSize + 1;
-    const deep = grid.levels * cellSize + 1;
+    const deeps = [];
+    const levelGap = cellSize * 4;
+
+    for (let d=0; d<grid.levels; d++) {
+        deeps.push(d * levelGap + 1)
+    }
 
     let points: Line[] = [];
 
     // 绘制墙壁 (根据链接情况)
     grid.eachCell((cell: Cell3D) => {
         if (!cell) return; // 跳过空单元格
-        points = points.concat(...toPoints(cell, cellSize));
+        points = points.concat(...toPoints(cell, cellSize, levelGap));
 
         const x = cell.col * cellSize;
         const y = cell.row * cellSize;
-        const z = cell.level * cellSize;
+        const z = cell.level * levelGap;
 
         // 上下通道
         if (cell.linked(cell.down as Cell3D)) {
             points.push({
                 start: {
-                    x: x + cellSize / 2,
-                    y: y + cellSize / 2,
-                    z: z,
+                    x: x + cellSize / 4 * 3,
+                    y: y + cellSize / 4 * 3,
+                    z: z + 10,
                 },
                 end: {
-                    x: x + cellSize / 2,
-                    y: y + cellSize / 2,
-                    z: z - cellSize,
+                    x: x + cellSize / 4 * 3,
+                    y: y + cellSize / 4 * 3,
+                    z: z - levelGap - 10,
                 },
                 direction: 'DOWN'
             })
@@ -51,14 +56,14 @@ export default function points(grid: Grid3D) {
         if (cell.linked(cell.up as Cell3D)) {
             points.push({
                 start: {
-                    x: x + cellSize / 2,
-                    y: y + cellSize / 2,
-                    z: z,
+                    x: x + cellSize / 4,
+                    y: y + cellSize / 4,
+                    z: z - 2,
                 },
                 end: {
-                    x: x + cellSize / 2,
-                    y: y + cellSize / 2,
-                    z: z + cellSize,
+                    x: x + cellSize / 4,
+                    y: y + cellSize / 4,
+                    z: z + levelGap + 10,
                 },
                 direction: 'UP'
             })
@@ -71,17 +76,17 @@ export default function points(grid: Grid3D) {
         points,
         width,
         height,
-        deep,
+        deeps: deeps,
     };
 }
 
 // 同一层的点
-export function toPoints(cell: Cell3D, cellSize: number) {
+export function toPoints(cell: Cell3D, cellSize: number, levelGap: number) {
     let linePoints: Line[] = [];
     
     const x1 = cell.col * cellSize;
     const y1 = cell.row * cellSize;
-    const z = cell.level * cellSize;
+    const z = cell.level * levelGap;
 
     const x2 = (cell.col + 1) * cellSize;
     const y2 = (cell.row + 1) * cellSize;

@@ -7,9 +7,16 @@ export default class Grid<T extends ICell> {
     public cells: T[][];
     public cols: number;
     public rows: number;
-    constructor(rows: number, cols: number) {
+    public levels: number;
+
+    constructor(rows: number, cols: number);
+    constructor(rows: number, cols: number, levels: number);
+
+    constructor(rows: number, cols: number, levels?: number) {
         this.cols = cols;
         this.rows = rows;
+        this.levels = levels || 1;
+        
         this.cells = [];
         this.init();
     }
@@ -55,6 +62,7 @@ export default class Grid<T extends ICell> {
         this.cells.forEach(row => row.forEach(callback));
     }
 
+    getCell(level: number, row: number, col: number): T | undefined;
     getCell(row: number, col: number): T | undefined {
         if (row < 0 || row >= this.rows || col < 0 || col >= this.cols) {
             return undefined;

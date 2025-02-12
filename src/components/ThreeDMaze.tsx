@@ -42,11 +42,20 @@ export default function ThreeDMaze({ size, genMethod = 'recursive-backtracker' }
     const buildMaze = (scene?: THREE.Scene | null, width?: number, height?: number) => {
         if (!scene) return;
         scene.clear();
-        const grid = new Grid3D(3, size, size);
+        const grid = new Grid3D(size, size, 3);
         const gen = new genMap[genMethod]();
         // @ts-ignore
         gen.on(grid);
         const res = grid.toPoints();
+
+        res.deeps.forEach(deep => {
+            const planeGeometry = new THREE.PlaneGeometry(height, height);
+            const planeMaterial = new THREE.MeshBasicMaterial({ color: 0xdddddd, side: THREE.DoubleSide });
+            const plane = new THREE.Mesh(planeGeometry, planeMaterial);
+            console.log(deep);
+            plane.position.set(0, 0, deep);
+            scene.add(plane);
+        });
 
         const extrudeSettings = {
             steps: 2,
@@ -61,11 +70,10 @@ export default function ThreeDMaze({ size, genMethod = 'recursive-backtracker' }
         res.points.forEach((line) => {
 
             const { start, end, direction } = line 
+            const {x: x1, y: y1, z: z1} = start
+            const {x: x2, y: y2, z: z2} = end
 
             if (!direction) {
-                const {x: x1, y: y1, z} = start
-                const {x: x2, y: y2} = end
-
                 const p1 = svgToThree(Number(x1), Number(y1), res.width || 1000, res.height || 800, height || 800, height || 800);
                 const p2 = svgToThree(Number(x2), Number(y2), res.width|| 1000, res.height || 800, height || 800, height || 800);
     
@@ -77,11 +85,30 @@ export default function ThreeDMaze({ size, genMethod = 'recursive-backtracker' }
                 const geometry = new THREE.ExtrudeGeometry(shape, extrudeSettings);
                 const material = new THREE.MeshBasicMaterial( { color: 0x00ffff } );
                 const mesh = new THREE.Mesh(geometry, material);
-                mesh.translateZ(z)
+                mesh.translateZ(z1);
 
                 scene.add(mesh);
             } else {
                 // 上下通道
+                // 创建 Vector3 对象
+                const p1 = svgToThree(Number(x1), Number(y1), res.width || 1000, res.height || 800, height || 800, height || 800);
+                const p2 = svgToThree(Number(x2), Number(y2), res.width|| 1000, res.height || 800, height || 800, height || 800);
+                const startPoint = new THREE.Vector3(p1.x, p1.y, z1);
+                const endPoint = new THREE.Vector3(p2.x, p2.y, z2);
+
+                // 创建曲线路径
+                const curve = new THREE.LineCurve3(startPoint, endPoint);
+
+                // 创建管道几何体
+                const tubeGeometry = new THREE.TubeGeometry(curve, 64, 5, 8, true);
+
+                // 创建管道材质
+                const material = new THREE.MeshBasicMaterial({ color: direction === 'UP' ? 0x00ff00 : 0xff0000 });
+
+                // 创建管道网格
+                const mesh = new THREE.Mesh(tubeGeometry, material);
+
+                scene.add(mesh);
             }
 
         });
