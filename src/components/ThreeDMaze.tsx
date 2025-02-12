@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
 import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
-import Grid from '../maze/Grid';
+import Grid3D from '../maze/Grid3D';
 import RecursiveBacktracker from '../maze/gen/recursiveBacktracker';
 
 
@@ -33,7 +33,7 @@ function svgToThree(x: number, y: number, svgWidth: number, svgHeight: number, s
     };
   }
 
-export default function ThreeMaze({ size, genMethod = 'recursive-backtracker' }: Porps) {
+export default function ThreeDMaze({ size, genMethod = 'recursive-backtracker' }: Porps) {
 
     const threeContiner = useRef<HTMLDivElement>(null);
     const sceneRef = useRef<THREE.Scene>(null);
@@ -42,23 +42,11 @@ export default function ThreeMaze({ size, genMethod = 'recursive-backtracker' }:
     const buildMaze = (scene?: THREE.Scene | null, width?: number, height?: number) => {
         if (!scene) return;
         scene.clear();
-        const grid = new Grid(size, size);
+        const grid = new Grid3D(3, size, size);
         const gen = new genMap[genMethod]();
+        // @ts-ignore
         gen.on(grid);
-        const svgStr = grid.toSVG();
-        const div = document.createElement('div')
-        div.innerHTML = svgStr;
-
-        const svg = div.querySelector('svg');
-        const lines = div.querySelectorAll('line');
-
-        const planeGeometry = new THREE.PlaneGeometry(height || 800, height || 800);
-        const planeMaterial = new THREE.MeshBasicMaterial({ color: 0xdddddd, side: THREE.DoubleSide });
-        const plane = new THREE.Mesh(planeGeometry, planeMaterial);
-        
-        plane.position.set(0, 0, 0);
-
-        scene.add(plane);
+        const res = grid.toPoints();
 
         const extrudeSettings = {
             steps: 2,
@@ -70,28 +58,31 @@ export default function ThreeMaze({ size, genMethod = 'recursive-backtracker' }:
             bevelSegments: 1
         };
         
-        lines.forEach((line) => {
-            const x1 = line.getAttribute("x1");
-            const y1 = line.getAttribute("y1");
-            const x2 = line.getAttribute("x2");
-            const y2 = line.getAttribute("y2");
+        res.points.forEach((line) => {
 
-            const p1 = svgToThree(Number(x1), Number(y1), Number(svg?.getAttribute('width') || 1000), Number(svg?.getAttribute('height') || 800), height || 800, height || 800);
-            const p2 = svgToThree(Number(x2), Number(y2), Number(svg?.getAttribute('width') || 1000), Number(svg?.getAttribute('height') || 800), height || 800, height || 800);
+            const { start, end, direction } = line 
 
-            const shape = new THREE.Shape();
+            if (!direction) {
+                const {x: x1, y: y1, z} = start
+                const {x: x2, y: y2} = end
 
-            shape.moveTo(p1.x, p1.y);
-            shape.lineTo(p2.x, p2.y);
+                const p1 = svgToThree(Number(x1), Number(y1), res.width || 1000, res.height || 800, height || 800, height || 800);
+                const p2 = svgToThree(Number(x2), Number(y2), res.width|| 1000, res.height || 800, height || 800, height || 800);
+    
+                const shape = new THREE.Shape();
+    
+                shape.moveTo(p1.x, p1.y);
+                shape.lineTo(p2.x, p2.y);
+    
+                const geometry = new THREE.ExtrudeGeometry(shape, extrudeSettings);
+                const material = new THREE.MeshBasicMaterial( { color: 0x00ffff } );
+                const mesh = new THREE.Mesh(geometry, material);
+                mesh.translateZ(z)
 
-            const geometry = new THREE.ExtrudeGeometry(shape, extrudeSettings);
-            const material = new THREE.MeshBasicMaterial( { color: 0x00ffff } );
-            const mesh = new THREE.Mesh(geometry, material);
-            scene.add(mesh);
-
-            const axesHelper = new THREE.AxesHelper( 60 ); // 创建一个长度为 5 的坐标轴
-            axesHelper.position.set(400, -300, 10);
-            scene.add(axesHelper); // 将坐标轴添加到场景中
+                scene.add(mesh);
+            } else {
+                // 上下通道
+            }
 
         });
     }
