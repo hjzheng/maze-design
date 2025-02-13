@@ -19,6 +19,11 @@ function App() {
     <>
       <h1><img src={mazeUrl} /> Maze</h1>
       <Tabs>
+        <Tabs.TabPane tab='Cube Maze' key='cube-maze'>
+          <div className='tabWrapper'>
+            <CubeMaze />
+          </div>
+        </Tabs.TabPane>
         { Object.keys(genMap).map((key, i) => {
           return <Tabs.TabPane tab={key} key={i}>
             <div className='tabWrapper'>
@@ -69,11 +74,6 @@ function App() {
         <Tabs.TabPane tab='3D Maze' key='threeD-maze'>
           <div className='tabWrapper'>
             <ThreeDMaze size={20} />
-          </div>
-        </Tabs.TabPane>
-        <Tabs.TabPane tab='Cube Maze' key='cube-maze'>
-          <div className='tabWrapper'>
-            <CubeMaze size={10} />
           </div>
         </Tabs.TabPane>
         <Tabs.TabPane tab='test' key='test'>
