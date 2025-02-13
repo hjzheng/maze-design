@@ -1,11 +1,10 @@
 # maze-design
-The Book of Mazes for Programmers（JavaScript Edition）
+The Book of Mazes for Programmers（JavaScript Code Implementation）
 
 ```
 pnpm install
 pnpm run dev
 ```
-visit http://localhost:5173
 
 ![image](https://raw.githubusercontent.com/hjzheng/maze-design/refs/heads/main/src/assets/maze_text.svg)
 
