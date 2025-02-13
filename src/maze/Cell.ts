@@ -3,6 +3,7 @@ import Distances from "./solution/Distance";
 export interface ICell {
     row: number;
     col: number;
+    level?: number;
     north?: ICell;
     south?: ICell;
     east?: ICell;

@@ -6,12 +6,21 @@ import distanceGridTest2 from './distanceGridTest2';
 import colorGridTest from './colorGridCanvasTest';
 import maskGridTest from './MaskGridTest';
 import pollarGridTest from './PollarGridTest';
+import cubeGridTest from './cubeGridTest';
 
 export default function Test() {
     const [mazeStr, setMazeStr] = useState('');
     const canvas = useRef<HTMLCanvasElement>(null);  
 
     return <div>
+      <div className="card">
+        <button onClick={() => { 
+          const tmp = cubeGridTest();
+          setMazeStr(tmp)
+        }}>
+          Click me (Cube Grid)
+        </button>
+      </div>
       <div className="card">
         <button onClick={() => { 
           colorGridTest(canvas.current!);
