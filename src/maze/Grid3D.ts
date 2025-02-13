@@ -1,3 +1,6 @@
+// @ts-nocheck
+
+// TODO Grid3D 继承 Grid 后，由于 Cells 需要升级成三维数组，目前没有好方法兼容类型检测，暂时禁用 TS 类型检查 
 import Grid from "./Grid"
 import Cell3D from "./Cell3D"
 import points from "./display/points"

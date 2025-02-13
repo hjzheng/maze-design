@@ -62,7 +62,6 @@ export default class Grid<T extends ICell> {
         this.cells.forEach(row => row.forEach(callback));
     }
 
-    getCell(level: number, row: number, col: number): T | undefined;
     getCell(row: number, col: number): T | undefined {
         if (row < 0 || row >= this.rows || col < 0 || col >= this.cols) {
             return undefined;
