@@ -53,7 +53,7 @@ export default function SvgMaze({ size, num, genMethod = 'binary-tree' }: Porps)
                 gen.on(grid);
             }
 
-            let distances = grid.getCell(0, 0)?.distances();
+            let distances = grid.getCell(Math.floor(size/2 - 1), Math.floor(size/2 - 1))?.distances();
             grid.setDistances(distances);
             return grid.toSVG();
         })
