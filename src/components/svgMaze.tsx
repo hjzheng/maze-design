@@ -9,6 +9,7 @@ import HuntAndKill from '../maze/gen/huntAndKill';
 import RecursiveBacktracker from '../maze/gen/recursiveBacktracker';
 import { SimplifiedPrims, Prims } from '../maze/gen/prims';
 import GrowingTree from '../maze/gen/growingTree';
+import Ellers from '../maze/gen/ellers';
 
 export const genMap = {
     'binary-tree': BinaryTree,
@@ -22,6 +23,7 @@ export const genMap = {
    'growing-tree-random': GrowingTree,
    'growing-tree-last': GrowingTree,
    'growing-tree-mix': GrowingTree,
+   'ellers': Ellers,
   }
 
 type Porps = {
