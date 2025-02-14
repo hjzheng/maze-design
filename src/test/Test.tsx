@@ -7,12 +7,21 @@ import colorGridTest from './colorGridCanvasTest';
 import maskGridTest from './MaskGridTest';
 import pollarGridTest from './PollarGridTest';
 import cubeGridTest from './cubeGridTest';
+import cylinderGridTest from './cylinderGridTest';
 
 export default function Test() {
     const [mazeStr, setMazeStr] = useState('');
     const canvas = useRef<HTMLCanvasElement>(null);  
 
     return <div>
+      <div className="card">
+        <button onClick={() => { 
+          const tmp = cylinderGridTest();
+          setMazeStr(tmp)
+        }}>
+          Click me (Cylinder Grid)
+        </button>
+      </div>
       <div className="card">
         <button onClick={() => { 
           const tmp = cubeGridTest();

@@ -33,10 +33,10 @@ export default class Grid<T extends ICell> {
 
     configureCells(): void {
         this.eachCell(cell => {
-            cell.north = this.cells[cell.row - 1]?.[cell.col];
-            cell.south = this.cells[cell.row + 1]?.[cell.col];
-            cell.west = this.cells[cell.row]?.[cell.col - 1];
-            cell.east = this.cells[cell.row]?.[cell.col + 1];
+            cell.north = this.getCell(cell.row - 1, cell.col);
+            cell.south = this.getCell(cell.row + 1, cell.col);
+            cell.west = this.getCell(cell.row, cell.col - 1);
+            cell.east = this.getCell(cell.row, cell.col + 1);
         });
     }
 

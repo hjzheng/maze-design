@@ -5,7 +5,7 @@ export default function svg<T extends ICell>(grid: Grid<T>, cellContent?: (cell:
     const cellSize = 30; // 单元格大小，可调整
     const strokeWidth = 1; // 线条粗细，可调整
 
-    let svgStr = `<svg width="${grid.cols * cellSize + 1}" height="${grid.rows * cellSize + 1}">`;
+    let svgStr = `<svg xmlns='http://www.w3.org/2000/svg' width="${grid.cols * cellSize + 1}" height="${grid.rows * cellSize + 1}">`;
 
     // 绘制墙壁 (根据链接情况)
     grid.eachCell((cell: T) => {

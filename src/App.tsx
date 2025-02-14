@@ -12,6 +12,7 @@ import KruskalWaveMaze from './components/KruskalWaveMaze';
 import ThreeMaze from './components/ThreeMaze';
 import ThreeDMaze from './components/ThreeDMaze';
 import CubeMaze from './components/CubeMaze';
+import CylinderMaze from './components/CylinderMaze';
 import mazeUrl from './assets/maze_text.png';
 
 function App() {
@@ -22,6 +23,11 @@ function App() {
         <Tabs.TabPane tab='Cube Maze' key='cube-maze'>
           <div className='tabWrapper'>
             <CubeMaze />
+          </div>
+        </Tabs.TabPane>
+        <Tabs.TabPane tab='Cylinder Maze' key='cylinder-maze'>
+          <div className='tabWrapper'>
+            <CylinderMaze />
           </div>
         </Tabs.TabPane>
         { Object.keys(genMap).map((key, i) => {
